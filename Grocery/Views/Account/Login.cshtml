@@ -1,0 +1,477 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreshMart | Login</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-green: #2E7D32;
+            --dark-green: #1B5E20;
+            --light-green: #4CAF50;
+            --pale-green: #E8F5E9;
+            --gray-bg: #f9f9f9;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --border-color: #dddddd;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--gray-bg);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .login-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .login-header {
+            background-color: var(--primary-green);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+            .logo i {
+                color: white;
+                margin-right: 10px;
+            }
+
+        .login-header h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-header p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        .login-body {
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .form-control {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+            .form-control:focus {
+                border-color: var(--light-green);
+                box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.15);
+            }
+
+        .password-container {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+
+            .remember-me input {
+                margin-right: 0.5rem;
+            }
+
+            .remember-me label {
+                color: var(--text-light);
+                font-size: 0.95rem;
+            }
+
+        .forgot-password {
+            color: var(--primary-green);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+            .forgot-password:hover {
+                text-decoration: underline;
+                color: var(--dark-green);
+            }
+
+        .btn-login {
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.9rem;
+            font-size: 1.05rem;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-bottom: 1.5rem;
+        }
+
+            .btn-login:hover {
+                background-color: var(--dark-green);
+            }
+
+        .divider {
+            text-align: center;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+            .divider::before {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 0;
+                right: 0;
+                height: 1px;
+                background-color: var(--border-color);
+            }
+
+            .divider span {
+                background-color: white;
+                padding: 0 1rem;
+                color: var(--text-light);
+                font-size: 0.9rem;
+            }
+
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            background-color: white;
+            color: var(--text-dark);
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+            .social-btn:hover {
+                border-color: var(--light-green);
+                color: var(--primary-green);
+                transform: translateY(-2px);
+            }
+
+        .register-link {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+            .register-link a {
+                color: var(--primary-green);
+                font-weight: 600;
+                text-decoration: none;
+            }
+
+                .register-link a:hover {
+                    text-decoration: underline;
+                }
+
+        .alert-message {
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            display: none;
+        }
+
+        .alert-success {
+            background-color: rgba(76, 175, 80, 0.1);
+            border-left: 4px solid var(--light-green);
+            color: var(--dark-green);
+        }
+
+        .alert-error {
+            background-color: rgba(244, 67, 54, 0.1);
+            border-left: 4px solid #f44336;
+            color: #c62828;
+        }
+
+        /* Demo credentials */
+        .demo-credentials {
+            background-color: var(--pale-green);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            border-left: 4px solid var(--light-green);
+        }
+
+            .demo-credentials h6 {
+                color: var(--dark-green);
+                margin-bottom: 0.5rem;
+                font-weight: 600;
+            }
+
+            .demo-credentials p {
+                margin-bottom: 0.25rem;
+                color: var(--text-dark);
+            }
+
+        /* Responsive adjustments */
+        /* media (max-width: 576px) {
+            .login-body {
+                padding: 1.5rem;
+            }
+
+            .login-header {
+                padding: 1.5rem;
+            }
+
+                .login-header h1 {
+                    font-size: 1.5rem;
+                }
+
+            .form-options {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+            } */
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="logo">
+                    <i class="fas fa-shopping-basket"></i> FreshMart
+                </div>
+                <h1>Welcome Back</h1>
+                <p>Sign in to your account to continue shopping</p>
+            </div>
+
+            <div class="login-body">
+                <!-- Demo credentials (optional - remove in production) -->
+                <div class="demo-credentials">
+                    <h6>Demo Credentials</h6>
+                    <p><strong>Email:</strong> customer@freshmart.com</p>
+                    <p><strong>Password:</strong> demo1234</p>
+                </div>
+
+                <!-- Alert messages -->
+                <div id="successMessage" class="alert-message alert-success">
+                    <i class="fas fa-check-circle me-2"></i> Login successful! Redirecting...
+                </div>
+
+                <div id="errorMessage" class="alert-message alert-error">
+                    <i class="fas fa-exclamation-circle me-2"></i> Invalid email or password. Please try again.
+                </div>
+
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="form-label">Password</label>
+                        <div class="password-container">
+                            <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+                            <button type="button" class="toggle-password" id="togglePassword">
+                                <i class="far fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-options">
+                        <div class="remember-me">
+                            <input type="checkbox" id="remember">
+                            <label for="remember">Remember me</label>
+                        </div>
+                        <a href="#" class="forgot-password">Forgot Password?</a>
+                    </div>
+
+                    <button type="submit" class="btn-login">Sign In</button>
+
+                    <div class="divider">
+                        <span>Or sign in with</span>
+                    </div>
+
+                    <div class="social-login">
+                        <a href="#" class="social-btn">
+                            <i class="fab fa-google"></i>
+                        </a>
+                        <a href="#" class="social-btn">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-btn">
+                            <i class="fab fa-apple"></i>
+                        </a>
+                    </div>
+
+                    <div class="register-link">
+                        Don't have an account? <a href="#">Create Account</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Toggle password visibility
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const icon = this.querySelector('i');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+
+        // Form submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Get form values
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const remember = document.getElementById('remember').checked;
+
+            // Hide any existing alerts
+            document.getElementById('successMessage').style.display = 'none';
+            document.getElementById('errorMessage').style.display = 'none';
+
+            // Demo validation - In a real application, this would be a server call
+            const demoEmail = 'customer@freshmart.com';
+            const demoPassword = 'demo1234';
+
+            // Simple validation for demo purposes
+            if (email === demoEmail && password === demoPassword) {
+                // Show success message
+                const successMessage = document.getElementById('successMessage');
+                successMessage.style.display = 'block';
+                successMessage.innerHTML = '<i class="fas fa-check-circle me-2"></i> Login successful! Redirecting to your dashboard...';
+
+                // Simulate redirect after 2 seconds
+                setTimeout(() => {
+                    alert(`Welcome back to FreshMart! You would now be redirected to your dashboard.`);
+
+                    // In a real application, this would redirect to the dashboard
+                    // window.location.href = '/dashboard.html';
+
+                    // Reset form
+                    this.reset();
+                    successMessage.style.display = 'none';
+                }, 2000);
+            } else {
+                // Show error message
+                const errorMessage = document.getElementById('errorMessage');
+                errorMessage.style.display = 'block';
+
+                // Clear password field
+                document.getElementById('password').value = '';
+
+                // Focus back on password field
+                document.getElementById('password').focus();
+            }
+        });
+
+        // Forgot password link
+        document.querySelector('.forgot-password').addEventListener('click', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value || 'your email';
+            alert(`A password reset link would be sent to ${email}. For this demo, please use the demo credentials provided.`);
+        });
+
+        // Create account link
+        document.querySelector('.register-link a').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('You would be redirected to the registration page. For this demo, please use the demo credentials to login.');
+        });
+
+        // Social login buttons
+        document.querySelectorAll('.social-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const platform = this.querySelector('i').className.split(' ')[1].split('-')[1];
+                alert(`This would initiate ${platform} authentication. For this demo, please use the email/password login.`);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -6,16 +6,24 @@ namespace Grocery.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        //private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        //public HomeController(ILogger<HomeController> logger)
+        //{
+        //    _logger = logger;
+        //}
+
+        private readonly AuthDbContext db;
+
+        public HomeController(AuthDbContext db)
         {
-            _logger = logger;
+            this.db = db;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var c = db.Categories.ToList();
+            return View(c);
         }
 
         public IActionResult Privacy()
