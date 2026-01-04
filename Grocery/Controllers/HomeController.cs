@@ -1,6 +1,7 @@
-using System.Diagnostics;
 using Grocery.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace Grocery.Controllers
 {
@@ -22,11 +23,30 @@ namespace Grocery.Controllers
 
         public IActionResult Index()
         {
-            var c = db.Categories.ToList();
-            return View(c);
+            var prod_show = new HomeView
+            {
+                Product = db.Products.Include(x => x.Category).OrderBy(p => p.ProductId).ToList(),
+                Category = db.Categories.ToList()
+            };
+            
+            return View(prod_show);
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+        public IActionResult Prodlist(int id)
+        {
+            var check = db.Products.Where(p=> p.ProductId == id).Include(x => x.Category).ToList();
+
+            var model = new HomeView
+            {
+                Product = check
+            };
+            return View(model);
+        }
+        public IActionResult SingleProd()
         {
             return View();
         }

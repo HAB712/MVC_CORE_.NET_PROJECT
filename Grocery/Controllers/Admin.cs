@@ -15,5 +15,36 @@ namespace Grocery.Controllers
         {
             return View();
         }
+        public IActionResult Category()
+        {
+            return View();
+        }
+        public IActionResult EditCat()
+        {
+            return View();
+        }
+
+        public IActionResult DelCat()
+        {
+            return View();
+        }
+        public IActionResult Product()
+        {
+            return View();
+        }
+
+        public IActionResult EditProd()
+        {
+            return View();
+        }
+
+       public IActionResult DelProd()
+        {
+            return View();
+        }
+        public IActionResult Order()
+        {
+            return View();
+        }
     }
 }

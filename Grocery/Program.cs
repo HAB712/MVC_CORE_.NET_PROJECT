@@ -10,6 +10,20 @@ builder.Services.AddDbContext<Grocery.Models.AuthDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
+//2. // Session Add Karo for Authentication purpose
+builder.Services.AddSession(options => {
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+// Authentication Add Karo
+builder.Services.AddAuthentication("CookieAuth")
+    .AddCookie("CookieAuth", options => {
+        options.LoginPath = "/Account/Login";
+        options.AccessDeniedPath = "/Account/AccessDenied";
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+    });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

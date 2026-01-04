@@ -118,8 +118,33 @@
                                     <li><a href="#">English</a></li>
                                 </ul>
                             </div>
+
                             <div class="header__top__right__auth">
-                                <a href="#"><i class="fa fa-user"></i> Login</a>
+                                @if (User.Identity != null && User.Identity.IsAuthenticated)
+                                {
+                                    <ul class="list-unstyled d-flex align-items-center gap-3 mb-0">
+                                        <li class="nav-item">
+                                            <span class="nav-link">
+                                                Hello, @User.Identity.Name
+                                            </span>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-controller="Account" asp-action="Logout">
+                                                <i class="fa fa-sign-out"></i> Logout
+                                            </a>
+                                        </li>
+                                    </ul>
+                                  
+                                }
+                                else
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-controller="Account" asp-action="Login">
+                                            <i class="fa fa-user"></i> Login
+                                        </a>
+                                    </li>
+                                }
                             </div>
                         </div>
                     </div>

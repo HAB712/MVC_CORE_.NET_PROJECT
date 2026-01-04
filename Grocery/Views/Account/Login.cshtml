@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@model Grocery.Models.RegisterValidate
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -285,23 +290,23 @@
 
         /* Responsive adjustments */
         /* media (max-width: 576px) {
-            .login-body {
-                padding: 1.5rem;
-            }
+                    .login-body {
+                        padding: 1.5rem;
+                    }
 
-            .login-header {
-                padding: 1.5rem;
-            }
+                    .login-header {
+                        padding: 1.5rem;
+                    }
 
-                .login-header h1 {
-                    font-size: 1.5rem;
-                }
+                        .login-header h1 {
+                            font-size: 1.5rem;
+                        }
 
-            .form-options {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.75rem;
-            } */
+                    .form-options {
+                        flex-direction: column;
+                        align-items: flex-start;
+                        gap: 0.75rem;
+                    } */
         }
     </style>
 </head>
@@ -333,16 +338,16 @@
                     <i class="fas fa-exclamation-circle me-2"></i> Invalid email or password. Please try again.
                 </div>
 
-                <form id="loginForm">
+                <form asp-controller="Account"  asp-action="Login" id="loginForm">
                     <div class="form-group">
-                        <label for="email" class="form-label">Email Address</label>
-                        <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                        <label  class="form-label">Email Address</label>
+                        <input name="email" id="email" class="form-control" placeholder="Enter your email" >
                     </div>
 
                     <div class="form-group">
-                        <label for="password" class="form-label">Password</label>
+                        <label  class="form-label">Password</label>
                         <div class="password-container">
-                            <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+                            <input type="password" id="password" class="form-control" placeholder="Enter your password" name="password">
                             <button type="button" class="toggle-password" id="togglePassword">
                                 <i class="far fa-eye"></i>
                             </button>
@@ -376,7 +381,7 @@
                     </div>
 
                     <div class="register-link">
-                        Don't have an account? <a href="#">Create Account</a>
+                        Don't have an account? <a asp-controller="Account" asp-action="Register">Create Account</a>
                     </div>
                 </form>
             </div>
@@ -401,76 +406,6 @@
                 icon.classList.remove('fa-eye-slash');
                 icon.classList.add('fa-eye');
             }
-        });
-
-        // Form submission
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            // Get form values
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const remember = document.getElementById('remember').checked;
-
-            // Hide any existing alerts
-            document.getElementById('successMessage').style.display = 'none';
-            document.getElementById('errorMessage').style.display = 'none';
-
-            // Demo validation - In a real application, this would be a server call
-            const demoEmail = 'customer@freshmart.com';
-            const demoPassword = 'demo1234';
-
-            // Simple validation for demo purposes
-            if (email === demoEmail && password === demoPassword) {
-                // Show success message
-                const successMessage = document.getElementById('successMessage');
-                successMessage.style.display = 'block';
-                successMessage.innerHTML = '<i class="fas fa-check-circle me-2"></i> Login successful! Redirecting to your dashboard...';
-
-                // Simulate redirect after 2 seconds
-                setTimeout(() => {
-                    alert(`Welcome back to FreshMart! You would now be redirected to your dashboard.`);
-
-                    // In a real application, this would redirect to the dashboard
-                    // window.location.href = '/dashboard.html';
-
-                    // Reset form
-                    this.reset();
-                    successMessage.style.display = 'none';
-                }, 2000);
-            } else {
-                // Show error message
-                const errorMessage = document.getElementById('errorMessage');
-                errorMessage.style.display = 'block';
-
-                // Clear password field
-                document.getElementById('password').value = '';
-
-                // Focus back on password field
-                document.getElementById('password').focus();
-            }
-        });
-
-        // Forgot password link
-        document.querySelector('.forgot-password').addEventListener('click', function(e) {
-            e.preventDefault();
-            const email = document.getElementById('email').value || 'your email';
-            alert(`A password reset link would be sent to ${email}. For this demo, please use the demo credentials provided.`);
-        });
-
-        // Create account link
-        document.querySelector('.register-link a').addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('You would be redirected to the registration page. For this demo, please use the demo credentials to login.');
-        });
-
-        // Social login buttons
-        document.querySelectorAll('.social-btn').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                const platform = this.querySelector('i').className.split(' ')[1].split('-')[1];
-                alert(`This would initiate ${platform} authentication. For this demo, please use the email/password login.`);
-            });
         });
     </script>
 </body>
