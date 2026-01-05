@@ -1,4 +1,23 @@
-﻿    <!-- Breadcrumb Section Begin -->
+﻿@model Grocery.Models.HomeView
+
+@foreach (var item in Model.CartItems)
+{
+    <tr>
+        <td>@item.Product.ProductName</td>
+        <td>@item.Quantity</td>
+        <td>@item.Price</td>
+        <td>@(item.Quantity* item.Price)</td>
+    </tr>
+}
+
+<h4>
+    Grand Total:
+    @Model.CartItems.Sum(x => x.Quantity * x.Price)
+</h4>
+
+
+
+<!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
     <div class="container">
         <div class="row">
@@ -15,8 +34,6 @@
     </div>
 </section>
 <!-- Breadcrumb Section End -->
-
-
 <!-- Shoping Cart Section Begin -->
 <section class="shoping-cart spad">
     <div class="container">
